@@ -6,6 +6,21 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  final _questions = const [
+    // This is a list of maps, each map contains two keys here
+    {
+      'questionText1': 'Find the missing number in series',
+      'questionText2': '8, ?, -4, -10, -16, -22?',
+      'answers': [0, -1, -3, -2],
+      'correctAns': -2,
+    },
+    {
+      'questionText1': 'Find the missing number in series',
+      'questionText2': '75, 143, 279, 551, ?, 2183',
+      'answers': [640, 780, 980, 1095],
+      'correctAns': 1095,
+    }
+  ];
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -19,7 +34,7 @@ class MyApp extends StatelessWidget {
             body1: TextStyle(fontSize: 24),
             body2: TextStyle(fontSize: 14),
           )),
-      home: HomeScreen(),
+      home: HomeScreen(_questions),
     );
   }
 }

@@ -1,12 +1,27 @@
 import 'package:flutter/material.dart';
 import '../widgets/option_item.dart';
+import '../widgets/question.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   //Values taken from provided UI sample
+  List<Map<String, Object>> questions;
+
+  HomeScreen(this.questions);
+
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   final Color topBarcolor1 = const Color(0xFF236D72);
+
   final Color topBarcolor2 = const Color(0x4D9196).withOpacity(0.97);
+
   final Color orangeColor = const Color(0xFFEC8308);
+
   final Color greyColor = const Color(0xFFF6F5F5);
+
+  int questionIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -52,31 +67,8 @@ class HomeScreen extends StatelessWidget {
             padding: const EdgeInsets.all(5.0),
             child: Text('1/10'),
           ),
-          Card(
-            //margin: EdgeInsets.all(15),
-            elevation: 3,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
-            child: Container(
-              color: greyColor,
-              width: 380,
-              height: 72,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Find the missing numbers in series',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 14),
-                  ),
-                  Text(
-                    '8, ?, -4, -10, -16, -22',
-                    textAlign: TextAlign.center,
-                  )
-                ],
-              ),
-            ),
-          ),
+          Question(widget.questions[questionIndex]['questionText1'],
+              widget.questions[questionIndex]['questionText2']),
           SizedBox(height: 24),
           Column(
             children: [
@@ -99,16 +91,30 @@ class HomeScreen extends StatelessWidget {
           ),
           Text(
             'Too Hard! Take the next question',
-            style: TextStyle(fontSize: 10),
+            style: TextStyle(fontSize: 12),
             textAlign: TextAlign.center,
           ),
-          Container(
-            child: RaisedButton(
-              onPressed: () {},
+          SizedBox(height: 6),
+          InkWell(
+            splashColor: Theme.of(context).accentColor,
+            borderRadius: BorderRadius.circular(30),
+            child: Card(
+              margin: EdgeInsets.all(5),
+              color: Theme.of(context).accentColor,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25)),
+              elevation: 4,
+              child: Container(
+                width: 280,
+                height: 50,
+                alignment: Alignment.center,
+                child: Text(
+                  'Skip',
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
             ),
-            width: 240,
-            height: 45,
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(25)),
+            onTap: () {},
           ),
         ],
       ),
