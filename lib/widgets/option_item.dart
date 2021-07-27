@@ -1,10 +1,26 @@
 import 'package:flutter/material.dart';
 
-class OptionItem extends StatelessWidget {
-  final String title;
-  final bool isCorrect;
+class OptionItem extends StatefulWidget {
+  final int title;
+  final int correctAns;
+  OptionItem({@required this.title, @required this.correctAns});
 
-  OptionItem({@required this.title, this.isCorrect = false});
+  @override
+  _OptionItemState createState() => _OptionItemState();
+}
+
+class _OptionItemState extends State<OptionItem> {
+  Icon icon = Icon(Icons.circle_outlined, color: Colors.grey);
+
+  bool isCorrect(int thisAns, int answer) {
+    if (thisAns == answer)
+      return true;
+    else
+      return false;
+  }
+
+  void toggleIcon() {}
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -23,19 +39,26 @@ class OptionItem extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Icon(
-                    Icons.circle_outlined,
-                    color: Colors.grey,
-                  ),
+                  child: icon,
                 ),
                 SizedBox(
                   width: 25,
                 ),
-                Text('0'),
+                Text('${widget.title}'),
               ],
             )),
       ),
-      onTap: () {},
+      onTap: () {
+        if (!isCorrect(widget.title, widget.correctAns))
+          setState(() {
+            icon = Icon(Icons.minimize_outlined);
+          });
+        else {
+          setState(() {
+            icon = Icon(Icons.add);
+          });
+        }
+      },
     );
   }
 }

@@ -73,16 +73,20 @@ class _HomeScreenState extends State<HomeScreen> {
           Column(
             children: [
               OptionItem(
-                title: '0',
+                title: 0,
+                correctAns: widget.questions[questionIndex]['correctAns'],
               ),
               OptionItem(
-                title: '0',
+                title: -1,
+                correctAns: widget.questions[questionIndex]['correctAns'],
               ),
               OptionItem(
-                title: '0',
+                title: -3,
+                correctAns: widget.questions[questionIndex]['correctAns'],
               ),
               OptionItem(
-                title: '0',
+                title: -2,
+                correctAns: widget.questions[questionIndex]['correctAns'],
               ),
             ],
           ),
