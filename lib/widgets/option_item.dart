@@ -10,6 +10,7 @@ class OptionItem extends StatefulWidget {
 }
 
 class _OptionItemState extends State<OptionItem> {
+  final Icon emptyIcon = Icon(Icons.circle_outlined, color: Colors.grey);
   Icon icon = Icon(Icons.circle_outlined, color: Colors.grey);
 
   bool isCorrect(int thisAns, int answer) {
@@ -19,7 +20,24 @@ class _OptionItemState extends State<OptionItem> {
       return false;
   }
 
-  void toggleIcon() {}
+//Used to string because equalto operator wasn't working
+  void toggleIcon() {
+    if (icon.toString() == emptyIcon.toString()) {
+      if (!isCorrect(widget.title, widget.correctAns)) {
+        setState(() {
+          icon = Icon(Icons.minimize_outlined);
+        });
+      } else {
+        setState(() {
+          icon = Icon(Icons.add);
+        });
+      }
+    } else {
+      setState(() {
+        icon = Icon(Icons.circle_outlined, color: Colors.grey);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,17 +66,7 @@ class _OptionItemState extends State<OptionItem> {
               ],
             )),
       ),
-      onTap: () {
-        if (!isCorrect(widget.title, widget.correctAns))
-          setState(() {
-            icon = Icon(Icons.minimize_outlined);
-          });
-        else {
-          setState(() {
-            icon = Icon(Icons.add);
-          });
-        }
-      },
+      onTap: toggleIcon,
     );
   }
 }

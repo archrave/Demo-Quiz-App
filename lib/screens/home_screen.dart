@@ -1,3 +1,4 @@
+import 'package:domo_quiz/widgets/next_skip.dart';
 import 'package:flutter/material.dart';
 import '../widgets/option_item.dart';
 import '../widgets/question.dart';
@@ -93,33 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
           SizedBox(
             height: 64,
           ),
-          Text(
-            'Too Hard! Take the next question',
-            style: TextStyle(fontSize: 12),
-            textAlign: TextAlign.center,
-          ),
-          SizedBox(height: 6),
-          InkWell(
-            splashColor: Theme.of(context).accentColor,
-            borderRadius: BorderRadius.circular(30),
-            child: Card(
-              margin: EdgeInsets.all(5),
-              color: Theme.of(context).accentColor,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25)),
-              elevation: 4,
-              child: Container(
-                width: 280,
-                height: 50,
-                alignment: Alignment.center,
-                child: Text(
-                  'Skip',
-                  style: TextStyle(fontSize: 20),
-                ),
-              ),
-            ),
-            onTap: () {},
-          ),
+          NextSkip(),
         ],
       ),
     );
