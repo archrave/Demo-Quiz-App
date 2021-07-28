@@ -10,8 +10,35 @@ class OptionItem extends StatefulWidget {
 }
 
 class _OptionItemState extends State<OptionItem> {
-  final Icon emptyIcon = Icon(Icons.circle_outlined, color: Colors.grey);
-  Icon icon = Icon(Icons.circle_outlined, color: Colors.grey);
+  _OptionItemState() {
+    icon = emptyIcon;
+  }
+
+  CircleAvatar icon;
+
+  final CircleAvatar emptyIcon = CircleAvatar(
+    backgroundColor: Color(0xFFE5E5E5),
+    radius: 15,
+    //child: Icon(Icons.circle_outlined, size: 33, color: Colors.grey)
+  );
+
+  final CircleAvatar greenTick = CircleAvatar(
+    radius: 15,
+    backgroundColor: Colors.green,
+    child: Icon(
+      Icons.check,
+      color: Colors.white,
+    ),
+  );
+
+  final CircleAvatar redCross = CircleAvatar(
+    radius: 15,
+    backgroundColor: Colors.red,
+    child: Icon(
+      Icons.close,
+      color: Colors.white,
+    ),
+  );
 
   bool isCorrect(int thisAns, int answer) {
     if (thisAns == answer)
@@ -22,19 +49,21 @@ class _OptionItemState extends State<OptionItem> {
 
 //Used to string because equalto operator wasn't working
   void toggleIcon() {
-    if (icon.toString() == emptyIcon.toString()) {
+    if (icon == emptyIcon) {
+      print('matkr');
       if (!isCorrect(widget.title, widget.correctAns)) {
         setState(() {
-          icon = Icon(Icons.minimize_outlined);
+          icon = redCross;
         });
       } else {
         setState(() {
-          icon = Icon(Icons.add);
+          icon = greenTick;
         });
       }
     } else {
+      print('setkAr');
       setState(() {
-        icon = Icon(Icons.circle_outlined, color: Colors.grey);
+        icon = emptyIcon;
       });
     }
   }
@@ -57,7 +86,10 @@ class _OptionItemState extends State<OptionItem> {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: icon,
+                  child: Container(
+                    child: icon,
+                    color: Theme.of(context).accentColor,
+                  ),
                 ),
                 SizedBox(
                   width: 25,

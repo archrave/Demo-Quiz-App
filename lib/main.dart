@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
       'correctAns': 1095,
     }
   ];
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,9 @@ class MyApp extends StatelessWidget {
             body1: TextStyle(fontSize: 24),
             body2: TextStyle(fontSize: 14),
           )),
-      home: HomeScreen(_questions),
+      home: HomeScreen(
+        _questions,
+      ),
     );
   }
 }

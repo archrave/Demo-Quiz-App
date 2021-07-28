@@ -24,6 +24,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   int questionIndex = 0;
 
+  void resetIcons(int title) {}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
