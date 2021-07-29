@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class NextSkip extends StatefulWidget {
+  final Function raiseindexHandler;
+  NextSkip(this.raiseindexHandler);
   @override
   _NextSkipState createState() => _NextSkipState();
 }
@@ -34,7 +36,9 @@ class _NextSkipState extends State<NextSkip> {
             ),
           ),
         ),
-        onTap: () {},
+        onTap: () {
+          widget.raiseindexHandler();
+        },
       ),
     ]);
   }

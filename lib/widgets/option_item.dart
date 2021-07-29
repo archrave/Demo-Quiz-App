@@ -47,9 +47,11 @@ class _OptionItemState extends State<OptionItem> {
       return false;
   }
 
+  bool isSelected = false;
+
 //Used to string because equalto operator wasn't working
   void toggleIcon() {
-    if (icon == emptyIcon) {
+    if (isSelected == false) {
       print('matkr');
       if (!isCorrect(widget.title, widget.correctAns)) {
         setState(() {
@@ -60,12 +62,21 @@ class _OptionItemState extends State<OptionItem> {
           icon = greenTick;
         });
       }
+      isSelected = true;
     } else {
       print('setkAr');
       setState(() {
         icon = emptyIcon;
       });
+      isSelected = false;
     }
+  }
+
+  void deSelect() {
+    setState(() {
+      icon = emptyIcon;
+    });
+    isSelected = false;
   }
 
   @override

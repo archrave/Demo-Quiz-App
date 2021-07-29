@@ -24,7 +24,18 @@ class _HomeScreenState extends State<HomeScreen> {
 
   int questionIndex = 0;
 
-  void resetIcons(int title) {}
+  List<bool> _isSelected = [false, false, false, false];
+
+  // void resetSelected(int selectedAns, bool isOptionselected){
+  //     _isSelected.where((element) => element.title == selectedAns)
+
+  // }
+
+  void raiseIndex() {
+    setState(() {
+      questionIndex++;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -93,10 +104,22 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ],
           ),
+          // ListView.builder(
+          //   itemBuilder: (context, index) {
+          //     return OptionItem(
+          //       title: ((widget.questions[questionIndex]['answers'])
+          //           as List)[index],
+          //       correctAns: widget.questions[questionIndex]['correctAns'],
+          //     );
+          //   },
+          //   itemCount:
+          //       ((widget.questions[questionIndex]['answers']) as List).length,
+          // ),
+
           SizedBox(
             height: 64,
           ),
-          NextSkip(),
+          NextSkip(raiseIndex),
         ],
       ),
     );
