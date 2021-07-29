@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
           primaryColor: Color(0xFF53CE34),
           accentColor: Color(0xFFF6F5F5),
           canvasColor: Colors.white,
+          errorColor: Color(0xFFEC8308),
           textTheme: ThemeData.light().textTheme.copyWith(
                 title: TextStyle(
                     fontFamily: 'Roboto',

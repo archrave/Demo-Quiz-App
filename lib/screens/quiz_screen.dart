@@ -66,17 +66,25 @@ class _QuizScreenState extends State<QuizScreen> {
     return widget.questions[questionIndex]['answers'] as List<int>;
   }
 
-  // void initState() {
-  //   super.initState();
-  //   for (int i = 0; i < answers.length; i++)
-  //     answerIcon[i] = CircleAvatar(
-  //       backgroundColor: Color(0xFFE5E5E5),
-  //       radius: 15,
-  //     );
-  // }
+  Text skipText;
+  Text nextskipText;
+  Text nextText;
+  bool isCorrectAnswerSelected = false;
+  @override
+  void didChangeDependencies() {
+    skipText =
+        Text('Skip', style: TextStyle(color: Theme.of(context).errorColor));
+
+    nextskipText = skipText;
+
+    // Text nextskipText = Text('Skip', style: TextStyle(color: Color(0xFFEC8308)));
+    nextText =
+        Text('Next', style: TextStyle(color: Theme.of(context).primaryColor));
+
+    super.didChangeDependencies();
+  }
 
   void resetSelected(int ansIndex) {
-    //print('Bools are set false for indexes: ');
     for (int i = 0; i < answers.length; i++) {
       if (i != ansIndex) {
         setState(() {
@@ -84,7 +92,7 @@ class _QuizScreenState extends State<QuizScreen> {
           answerIcon[i] = emptyIcon;
         });
       }
-      print('$_isSelected[i] ,');
+      //print('$_isSelected[i] ,');
     }
   }
 
@@ -111,12 +119,17 @@ class _QuizScreenState extends State<QuizScreen> {
         setState(() {
           _isSelected[index] = true;
           answerIcon[index] = redCross;
+          isCorrectAnswerSelected = false;
+
+          //nextskipText = skipText;
         });
       } else {
         setState(() {
           _isSelected[index] = true;
-
           answerIcon[index] = greenTick;
+          isCorrectAnswerSelected = true;
+
+          //nextskipText = nextText;
         });
       }
     } else {
@@ -124,6 +137,9 @@ class _QuizScreenState extends State<QuizScreen> {
       setState(() {
         _isSelected[index] = false;
         answerIcon[index] = emptyIcon;
+        isCorrectAnswerSelected = false;
+
+        //nextskipText = skipText;
       });
     }
     resetSelected(index);
@@ -197,7 +213,7 @@ class _QuizScreenState extends State<QuizScreen> {
           SizedBox(
             height: 64,
           ),
-          NextSkip(raiseIndex),
+          NextSkip(isCorrectAnswerSelected, raiseIndex),
           SizedBox(height: 30),
           Text(
             'Candidate ID: Divyansh_divyanshjoshi20@gmail.com',
