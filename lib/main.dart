@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Domo Quiz',
       theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primaryColor: Color(0xFF53CE34),
           accentColor: Color(0xFFF6F5F5),
           textTheme: TextTheme(
             title: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),

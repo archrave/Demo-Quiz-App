@@ -37,22 +37,72 @@ class HomeScreen extends StatelessWidget {
           ),
           Container(
             width: 360,
-            height: 80,
+            height: 85,
             child: RaisedButton(
-              elevation: 5,
-              color: Color(0xFFF6F5F5),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(18.0),
-              ),
-              child: Row(
-                children: [
-                  Image.asset('images/024_logo.png'),
-                  Text('Submit'),
-                ],
-              ),
-              onPressed: () {},
-            ),
+                elevation: 5,
+                color: Color(0xFFF6F5F5),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18.0),
+                ),
+                child: Row(
+                  children: [
+                    Image.asset(
+                      'images/024_logo.png',
+                      height: 70,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 15.0, vertical: 5),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Number System',
+                            style: Theme.of(context).textTheme.title,
+                          ),
+                          Text(
+                            'Difficulty: Basic',
+                            style: TextStyle(fontSize: 8),
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                '100',
+                                style: TextStyle(
+                                    fontSize: 12, color: Colors.green),
+                              ),
+                              Text(
+                                ' /20,000+ Questions',
+                                style: TextStyle(fontSize: 10),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                onPressed: () => loadQuiz(context)),
           ),
+          SizedBox(height: 350),
+          Container(
+              width: 260,
+              height: 55,
+              child: RaisedButton(
+                onPressed: () => loadQuiz(context),
+                color: Theme.of(context).primaryColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                child: Text('Instant Quiz',
+                    style: TextStyle(color: Colors.white, fontSize: 16)),
+              )),
+          SizedBox(height: 30),
+          Text(
+            'Candidate ID: Divyansh_divyanshjoshi20@gmail.com',
+            style: TextStyle(fontSize: 10),
+          )
         ],
       ),
     );
