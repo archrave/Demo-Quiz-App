@@ -6,9 +6,9 @@ class OptionItem extends StatelessWidget {
   final int answerIndex;
   bool isOptionSelected;
   final Function toggleAnswerHandler;
+  CircleAvatar icon;
 
   //final Function restOptionsDeselect;
-  CircleAvatar icon;
   //bool isOptionSelected;
   OptionItem({
     @required this.title,
@@ -16,8 +16,7 @@ class OptionItem extends StatelessWidget {
     @required this.answerIndex,
     @required this.isOptionSelected,
     @required this.toggleAnswerHandler,
-    //@required this.restOptionsDeselect,
-    @required icon,
+    @required this.icon,
   });
 
   @override

@@ -177,8 +177,7 @@ class _QuizScreenState extends State<QuizScreen> {
           ),
           Question(widget.questions[questionIndex]['questionText1'],
               widget.questions[questionIndex]['questionText2']),
-          //SizedBox(height: 24),
-          Row(children: answerIcon),
+          SizedBox(height: 24),
           Container(
             height: 245,
             child: ListView.builder(
