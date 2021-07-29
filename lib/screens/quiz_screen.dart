@@ -1,11 +1,12 @@
-import 'package:domo_quiz/widgets/next_skip.dart';
 import 'package:flutter/material.dart';
-import '../widgets/option_item.dart';
 import '../widgets/question.dart';
+import '../widgets/appbar_ui.dart';
+import '../widgets/option_item.dart';
+import '../widgets/next_skip.dart';
 
 class QuizScreen extends StatefulWidget {
   //Values taken from provided UI sample
-  List<Map<String, Object>> questions;
+  final List<Map<String, Object>> questions;
 
   QuizScreen(this.questions);
 
@@ -14,10 +15,7 @@ class QuizScreen extends StatefulWidget {
 }
 
 class _QuizScreenState extends State<QuizScreen> {
-  final Color topBarcolor1 = const Color(0xFF236D72);
-  final Color topBarcolor2 = const Color(0x4D9196).withOpacity(0.97);
-  final Color orangeColor = const Color(0xFFEC8308);
-  final Color greyColor = const Color(0xFFF6F5F5);
+  final Color greymediumColor = const Color(0xFFE5E5E5);
 
   final CircleAvatar emptyIcon = CircleAvatar(
     backgroundColor: Color(0xFFE5E5E5),
@@ -66,21 +64,16 @@ class _QuizScreenState extends State<QuizScreen> {
     return widget.questions[questionIndex]['answers'] as List<int>;
   }
 
-  Text skipText;
-  Text nextskipText;
-  Text nextText;
   bool isCorrectAnswerSelected = false;
+  List<Container> progressBar;
   @override
   void didChangeDependencies() {
-    skipText =
-        Text('Skip', style: TextStyle(color: Theme.of(context).errorColor));
-
-    nextskipText = skipText;
-
-    // Text nextskipText = Text('Skip', style: TextStyle(color: Color(0xFFEC8308)));
-    nextText =
-        Text('Next', style: TextStyle(color: Theme.of(context).primaryColor));
-
+    progressBar = [
+      Container(
+        width: 26.16,
+        color: Theme.of(context).errorColor,
+      ),
+    ];
     super.didChangeDependencies();
   }
 
@@ -92,16 +85,34 @@ class _QuizScreenState extends State<QuizScreen> {
           answerIcon[i] = emptyIcon;
         });
       }
-      //print('$_isSelected[i] ,');
     }
   }
 
-  void raiseIndex() {
+  void nextskipButtonPressed() {
     if (questionIndex == widget.questions.length - 1)
       Navigator.of(context).pop();
     else
       setState(() {
         questionIndex++;
+        for (int i = 0; i < answers.length; i++) {
+          _isSelected[i] = false;
+          answerIcon[i] = emptyIcon;
+        }
+
+        if (isCorrectAnswerSelected == true) {
+          progressBar.removeLast();
+          progressBar.add(
+            Container(width: 26.16, color: Theme.of(context).primaryColor),
+          );
+          progressBar.add(
+            Container(width: 26.16, color: Theme.of(context).errorColor),
+          );
+          isCorrectAnswerSelected = false;
+        } else {
+          progressBar.add(
+            Container(width: 26.16, color: Theme.of(context).errorColor),
+          );
+        }
       });
   }
 
@@ -150,38 +161,13 @@ class _QuizScreenState extends State<QuizScreen> {
     return Scaffold(
       body: Column(
         children: [
-          Container(
-            padding: EdgeInsets.all(3),
-            child: Center(
-              child: Image.asset(
-                'images/domo_logo.png',
-                width: 100,
-              ),
-            ),
-          ),
-          Container(
-            height: 60,
-            width: double.infinity,
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-              colors: [
-                topBarcolor1,
-                topBarcolor2,
-              ],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            )),
-          ),
+          AppbarUI(),
           Container(
             height: 6,
             width: double.infinity,
+            color: greymediumColor,
             child: Row(
-              children: [
-                Container(
-                  width: 26,
-                  color: orangeColor,
-                ),
-              ],
+              children: progressBar,
             ),
           ),
           Padding(
@@ -213,7 +199,7 @@ class _QuizScreenState extends State<QuizScreen> {
           SizedBox(
             height: 64,
           ),
-          NextSkip(isCorrectAnswerSelected, raiseIndex),
+          NextSkip(isCorrectAnswerSelected, nextskipButtonPressed),
           SizedBox(height: 30),
           Text(
             'Candidate ID: Divyansh_divyanshjoshi20@gmail.com',

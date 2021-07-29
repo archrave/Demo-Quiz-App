@@ -4,9 +4,9 @@ class OptionItem extends StatelessWidget {
   final int title;
   final int correctAns;
   final int answerIndex;
-  bool isOptionSelected;
+  final bool isOptionSelected;
   final Function toggleAnswerHandler;
-  CircleAvatar icon;
+  final CircleAvatar icon;
 
   //final Function restOptionsDeselect;
   //bool isOptionSelected;

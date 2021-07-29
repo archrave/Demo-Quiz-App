@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class NextSkip extends StatefulWidget {
   final Function raiseindexHandler;
   //final Text text;
-  bool isCorrectSel;
+  final bool isCorrectSel;
   NextSkip(this.isCorrectSel, this.raiseindexHandler);
 
   @override
