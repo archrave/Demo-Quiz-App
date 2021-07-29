@@ -19,6 +19,36 @@ class OptionItem extends StatelessWidget {
     @required this.icon,
   });
 
+  Color buildBorderColor(CircleAvatar anIcon, BuildContext ctx) {
+    if (anIcon.toString() ==
+        CircleAvatar(
+          backgroundColor: Color(0xFFE5E5E5),
+          radius: 15,
+        ).toString()) return Theme.of(ctx).accentColor;
+    if (anIcon.toString() ==
+        CircleAvatar(
+          radius: 15,
+          backgroundColor: Colors.green,
+          child: Icon(
+            Icons.check,
+            color: Colors.white,
+          ),
+        ).toString()) return Theme.of(ctx).primaryColor;
+
+    if (anIcon.toString() ==
+        CircleAvatar(
+          radius: 15,
+          backgroundColor: Colors.red,
+          child: Icon(
+            Icons.close,
+            color: Colors.white,
+          ),
+        ).toString())
+      return Colors.red;
+    else
+      return Theme.of(ctx).primaryColor;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -32,10 +62,14 @@ class OptionItem extends StatelessWidget {
           elevation: 2,
           child: Container(
               decoration: BoxDecoration(
+                  // border:
+                  // Border.all(
+                  //   color: buildBorderColor(icon, context),
+                  // ),
                   color: Theme.of(context).accentColor,
                   borderRadius: BorderRadius.circular(30)),
               width: 330,
-              height: 40,
+              height: 41,
               child: Row(
                 children: [
                   Padding(
