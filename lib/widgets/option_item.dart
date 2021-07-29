@@ -1,105 +1,24 @@
 import 'package:flutter/material.dart';
 
-class OptionItem extends StatefulWidget {
+class OptionItem extends StatelessWidget {
   final int title;
   final int correctAns;
   final int answerIndex;
-  final Function restOptionsDeselect;
-
   bool isOptionSelected;
+  final Function toggleAnswerHandler;
+
+  //final Function restOptionsDeselect;
+  CircleAvatar icon;
+  //bool isOptionSelected;
   OptionItem({
     @required this.title,
     @required this.correctAns,
-    @required this.isOptionSelected,
     @required this.answerIndex,
-    @required this.restOptionsDeselect,
+    @required this.isOptionSelected,
+    @required this.toggleAnswerHandler,
+    //@required this.restOptionsDeselect,
+    @required icon,
   });
-
-  @override
-  _OptionItemState createState() => _OptionItemState();
-}
-
-class _OptionItemState extends State<OptionItem> {
-  void initState() {
-    icon = emptyIcon;
-
-    super.initState();
-  }
-
-  // _OptionItemState() {
-  // }
-  CircleAvatar icon;
-
-  @override
-  void didChangeDependencies() {
-    if (widget.isOptionSelected == false)
-      setState(() {
-        icon = emptyIcon;
-      });
-
-    super.didChangeDependencies();
-  }
-
-  final CircleAvatar emptyIcon = CircleAvatar(
-    backgroundColor: Color(0xFFE5E5E5),
-    radius: 15,
-  );
-
-  final CircleAvatar greenTick = CircleAvatar(
-    radius: 15,
-    backgroundColor: Colors.green,
-    child: Icon(
-      Icons.check,
-      color: Colors.white,
-    ),
-  );
-
-  final CircleAvatar redCross = CircleAvatar(
-    radius: 15,
-    backgroundColor: Colors.red,
-    child: Icon(
-      Icons.close,
-      color: Colors.white,
-    ),
-  );
-
-  bool isCorrect(int thisAns, int answer) {
-    if (thisAns == answer)
-      return true;
-    else
-      return false;
-  }
-
-//Used to string because equalto operator wasn't working
-  void toggleIcon() {
-    if (widget.isOptionSelected == false) {
-      print('matkr');
-      if (!isCorrect(widget.title, widget.correctAns)) {
-        setState(() {
-          icon = redCross;
-        });
-      } else {
-        setState(() {
-          icon = greenTick;
-        });
-      }
-      widget.isOptionSelected = true;
-    } else {
-      print('setkAr');
-      setState(() {
-        icon = emptyIcon;
-      });
-      widget.isOptionSelected = false;
-    }
-    widget.restOptionsDeselect(widget.answerIndex, widget.isOptionSelected);
-  }
-
-  void deSelect() {
-    if (widget.isOptionSelected == false)
-      setState(() {
-        icon = emptyIcon;
-      });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -130,11 +49,11 @@ class _OptionItemState extends State<OptionItem> {
                   SizedBox(
                     width: 25,
                   ),
-                  Text('${widget.title}'),
+                  Text('$title'),
                 ],
               )),
         ),
-        onTap: toggleIcon,
+        onTap: () => toggleAnswerHandler(answerIndex, correctAns),
       ),
     );
   }

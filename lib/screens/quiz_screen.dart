@@ -14,36 +14,74 @@ class QuizScreen extends StatefulWidget {
 }
 
 class _QuizScreenState extends State<QuizScreen> {
-  final CircleAvatar theEmptyIcon = CircleAvatar(
+  final Color topBarcolor1 = const Color(0xFF236D72);
+  final Color topBarcolor2 = const Color(0x4D9196).withOpacity(0.97);
+  final Color orangeColor = const Color(0xFFEC8308);
+  final Color greyColor = const Color(0xFFF6F5F5);
+
+  final CircleAvatar emptyIcon = CircleAvatar(
     backgroundColor: Color(0xFFE5E5E5),
     radius: 15,
   );
-  CircleAvatar get theIcon {
-    return theEmptyIcon;
-  }
+  final CircleAvatar greenTick = CircleAvatar(
+    radius: 15,
+    backgroundColor: Colors.green,
+    child: Icon(
+      Icons.check,
+      color: Colors.white,
+    ),
+  );
 
-  final Color topBarcolor1 = const Color(0xFF236D72);
-
-  final Color topBarcolor2 = const Color(0x4D9196).withOpacity(0.97);
-
-  final Color orangeColor = const Color(0xFFEC8308);
-
-  final Color greyColor = const Color(0xFFF6F5F5);
+  final CircleAvatar redCross = CircleAvatar(
+    radius: 15,
+    backgroundColor: Colors.red,
+    child: Icon(
+      Icons.close,
+      color: Colors.white,
+    ),
+  );
 
   int questionIndex = 0;
-
   List<bool> _isSelected = [false, false, false, false];
+  List<CircleAvatar> answerIcon = [
+    CircleAvatar(
+      backgroundColor: Color(0xFFE5E5E5),
+      radius: 15,
+    ),
+    CircleAvatar(
+      backgroundColor: Color(0xFFE5E5E5),
+      radius: 15,
+    ),
+    CircleAvatar(
+      backgroundColor: Color(0xFFE5E5E5),
+      radius: 15,
+    ),
+    CircleAvatar(
+      backgroundColor: Color(0xFFE5E5E5),
+      radius: 15,
+    ),
+  ];
+
   List<int> get answers {
     return widget.questions[questionIndex]['answers'] as List<int>;
   }
 
-  void resetSelected(int ansIndex, bool ansValue) {
-    _isSelected[ansIndex] = ansValue;
-    print('bools are set false for indexes: ');
+  // void initState() {
+  //   super.initState();
+  //   for (int i = 0; i < answers.length; i++)
+  //     answerIcon[i] = CircleAvatar(
+  //       backgroundColor: Color(0xFFE5E5E5),
+  //       radius: 15,
+  //     );
+  // }
+
+  void resetSelected(int ansIndex) {
+    //print('Bools are set false for indexes: ');
     for (int i = 0; i < answers.length; i++) {
       if (i != ansIndex) {
         setState(() {
           _isSelected[i] = false;
+          answerIcon[i] = emptyIcon;
         });
       }
       print('$_isSelected[i] ,');
@@ -57,6 +95,38 @@ class _QuizScreenState extends State<QuizScreen> {
       setState(() {
         questionIndex++;
       });
+  }
+
+  bool isCorrect(int thisAns, int answer) {
+    if (thisAns == answer)
+      return true;
+    else
+      return false;
+  }
+
+  void toggleIcon(int index, int actualAns) {
+    if (_isSelected[index] == false) {
+      print('Empty -> Filled');
+      if (!isCorrect(answers[index], actualAns)) {
+        setState(() {
+          _isSelected[index] = true;
+          answerIcon[index] = redCross;
+        });
+      } else {
+        setState(() {
+          _isSelected[index] = true;
+
+          answerIcon[index] = greenTick;
+        });
+      }
+    } else {
+      print('Filled -> Empty');
+      setState(() {
+        _isSelected[index] = false;
+        answerIcon[index] = emptyIcon;
+      });
+    }
+    resetSelected(index);
   }
 
   @override
@@ -107,7 +177,8 @@ class _QuizScreenState extends State<QuizScreen> {
           ),
           Question(widget.questions[questionIndex]['questionText1'],
               widget.questions[questionIndex]['questionText2']),
-          SizedBox(height: 24),
+          //SizedBox(height: 24),
+          Row(children: answerIcon),
           Container(
             height: 245,
             child: ListView.builder(
@@ -115,9 +186,10 @@ class _QuizScreenState extends State<QuizScreen> {
                 return OptionItem(
                   title: answers[index],
                   correctAns: widget.questions[questionIndex]['correctAns'],
-                  isOptionSelected: _isSelected[index],
                   answerIndex: index,
-                  restOptionsDeselect: resetSelected,
+                  isOptionSelected: _isSelected[index],
+                  toggleAnswerHandler: toggleIcon,
+                  icon: answerIcon[index],
                 );
               },
               itemCount: answers.length,
