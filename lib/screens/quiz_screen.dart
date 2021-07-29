@@ -32,9 +32,12 @@ class _QuizScreenState extends State<QuizScreen> {
   // }
 
   void raiseIndex() {
-    setState(() {
-      questionIndex++;
-    });
+    if (questionIndex == widget.questions.length - 1)
+      Navigator.of(context).pop();
+    else
+      setState(() {
+        questionIndex++;
+      });
   }
 
   @override
