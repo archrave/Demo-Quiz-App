@@ -12,8 +12,10 @@ class Question extends StatelessWidget {
       elevation: 3,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
       child: Container(
-        color: Theme.of(context).accentColor,
-        width: 380,
+        decoration: BoxDecoration(
+            color: Theme.of(context).accentColor,
+            borderRadius: BorderRadius.circular(25)),
+        width: 330,
         height: 72,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

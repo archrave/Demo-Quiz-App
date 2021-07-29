@@ -25,7 +25,9 @@ class _QuizScreenState extends State<QuizScreen> {
   int questionIndex = 0;
 
   List<bool> _isSelected = [false, false, false, false];
-
+  List<int> get answers {
+    return widget.questions[questionIndex]['answers'] as List<int>;
+  }
   // void resetSelected(int selectedAns, bool isOptionselected){
   //     _isSelected.where((element) => element.title == selectedAns)
 
@@ -44,7 +46,6 @@ class _QuizScreenState extends State<QuizScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
             padding: EdgeInsets.all(3),
@@ -87,42 +88,47 @@ class _QuizScreenState extends State<QuizScreen> {
           Question(widget.questions[questionIndex]['questionText1'],
               widget.questions[questionIndex]['questionText2']),
           SizedBox(height: 24),
-          Column(
-            children: [
-              OptionItem(
-                title: 0,
-                correctAns: widget.questions[questionIndex]['correctAns'],
-              ),
-              OptionItem(
-                title: -1,
-                correctAns: widget.questions[questionIndex]['correctAns'],
-              ),
-              OptionItem(
-                title: -3,
-                correctAns: widget.questions[questionIndex]['correctAns'],
-              ),
-              OptionItem(
-                title: -2,
-                correctAns: widget.questions[questionIndex]['correctAns'],
-              ),
-            ],
-          ),
-          // ListView.builder(
-          //   itemBuilder: (context, index) {
-          //     return OptionItem(
-          //       title: ((widget.questions[questionIndex]['answers'])
-          //           as List)[index],
+          // Column(
+          //   children: [
+          //     OptionItem(
+          //       title: 0,
           //       correctAns: widget.questions[questionIndex]['correctAns'],
-          //     );
-          //   },
-          //   itemCount:
-          //       ((widget.questions[questionIndex]['answers']) as List).length,
+          //     ),
+          //     OptionItem(
+          //       title: -1,
+          //       correctAns: widget.questions[questionIndex]['correctAns'],
+          //     ),
+          //     OptionItem(
+          //       title: -3,
+          //       correctAns: widget.questions[questionIndex]['correctAns'],
+          //     ),
+          //     OptionItem(
+          //       title: -2,
+          //       correctAns: widget.questions[questionIndex]['correctAns'],
+          //     ),
+          //   ],
           // ),
-
+          Container(
+            height: 235,
+            child: ListView.builder(
+              itemBuilder: (ctx, index) {
+                return OptionItem(
+                  title: answers[index],
+                  correctAns: widget.questions[questionIndex]['correctAns'],
+                );
+              },
+              itemCount: answers.length,
+            ),
+          ),
           SizedBox(
             height: 64,
           ),
           NextSkip(raiseIndex),
+          SizedBox(height: 30),
+          Text(
+            'Candidate ID: Divyansh_divyanshjoshi20@gmail.com',
+            style: TextStyle(fontSize: 10),
+          )
         ],
       ),
     );

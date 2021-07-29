@@ -31,11 +31,15 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           primaryColor: Color(0xFF53CE34),
           accentColor: Color(0xFFF6F5F5),
-          textTheme: TextTheme(
-            title: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
-            body1: TextStyle(fontSize: 24),
-            body2: TextStyle(fontSize: 14),
-          )),
+          canvasColor: Colors.white,
+          textTheme: ThemeData.light().textTheme.copyWith(
+                title: TextStyle(
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w700,
+                    fontSize: 20),
+                body1: TextStyle(fontFamily: 'Roboto', fontSize: 24),
+                body2: TextStyle(fontFamily: 'Roboto', fontSize: 14),
+              )),
       home: HomeScreen(
         _questions,
       ),

@@ -85,13 +85,13 @@ class _OptionItemState extends State<OptionItem> {
       splashColor: Theme.of(context).accentColor,
       borderRadius: BorderRadius.circular(30),
       child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
-        elevation: 4,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+        elevation: 2,
         child: Container(
             decoration: BoxDecoration(
                 color: Theme.of(context).accentColor,
                 borderRadius: BorderRadius.circular(30)),
-            width: 360,
+            width: 330,
             height: 45,
             child: Row(
               children: [

@@ -36,7 +36,7 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           Container(
-            width: 360,
+            width: 330,
             height: 85,
             child: RaisedButton(
                 elevation: 5,
@@ -46,9 +46,13 @@ class HomeScreen extends StatelessWidget {
                 ),
                 child: Row(
                   children: [
+                    // Text(
+                    //   'ddfad',
+                    //   style: TextStyle(fontSize: 20),
+                    // ),
                     Image.asset(
-                      'images/024_logo.png',
-                      height: 70,
+                      'images/024quiz_logo.png',
+                      scale: 0.80,
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
@@ -70,12 +74,14 @@ class HomeScreen extends StatelessWidget {
                               Text(
                                 '100',
                                 style: TextStyle(
-                                    fontSize: 12, color: Colors.green),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 11,
+                                    color: Colors.green),
                               ),
                               Text(
                                 ' /20,000+ Questions',
-                                style: TextStyle(fontSize: 10),
-                              )
+                                style: TextStyle(fontSize: 11),
+                              ),
                             ],
                           )
                         ],
