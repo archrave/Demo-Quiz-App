@@ -16,7 +16,7 @@ class Question extends StatelessWidget {
             color: Theme.of(context).accentColor,
             borderRadius: BorderRadius.circular(25)),
         width: 330,
-        height: 72,
+        height: 75,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -24,6 +24,9 @@ class Question extends StatelessWidget {
               quesText1,
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 14),
+            ),
+            SizedBox(
+              height: 8,
             ),
             Text(
               quesText2,

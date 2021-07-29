@@ -14,6 +14,14 @@ class QuizScreen extends StatefulWidget {
 }
 
 class _QuizScreenState extends State<QuizScreen> {
+  final CircleAvatar theEmptyIcon = CircleAvatar(
+    backgroundColor: Color(0xFFE5E5E5),
+    radius: 15,
+  );
+  CircleAvatar get theIcon {
+    return theEmptyIcon;
+  }
+
   final Color topBarcolor1 = const Color(0xFF236D72);
 
   final Color topBarcolor2 = const Color(0x4D9196).withOpacity(0.97);
@@ -28,10 +36,19 @@ class _QuizScreenState extends State<QuizScreen> {
   List<int> get answers {
     return widget.questions[questionIndex]['answers'] as List<int>;
   }
-  // void resetSelected(int selectedAns, bool isOptionselected){
-  //     _isSelected.where((element) => element.title == selectedAns)
 
-  // }
+  void resetSelected(int ansIndex, bool ansValue) {
+    _isSelected[ansIndex] = ansValue;
+    print('bools are set false for indexes: ');
+    for (int i = 0; i < answers.length; i++) {
+      if (i != ansIndex) {
+        setState(() {
+          _isSelected[i] = false;
+        });
+      }
+      print('$_isSelected[i] ,');
+    }
+  }
 
   void raiseIndex() {
     if (questionIndex == widget.questions.length - 1)
@@ -82,39 +99,25 @@ class _QuizScreenState extends State<QuizScreen> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Text('1/10'),
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              '${questionIndex + 1} / 10',
+              style: TextStyle(fontSize: 10),
+            ),
           ),
           Question(widget.questions[questionIndex]['questionText1'],
               widget.questions[questionIndex]['questionText2']),
           SizedBox(height: 24),
-          // Column(
-          //   children: [
-          //     OptionItem(
-          //       title: 0,
-          //       correctAns: widget.questions[questionIndex]['correctAns'],
-          //     ),
-          //     OptionItem(
-          //       title: -1,
-          //       correctAns: widget.questions[questionIndex]['correctAns'],
-          //     ),
-          //     OptionItem(
-          //       title: -3,
-          //       correctAns: widget.questions[questionIndex]['correctAns'],
-          //     ),
-          //     OptionItem(
-          //       title: -2,
-          //       correctAns: widget.questions[questionIndex]['correctAns'],
-          //     ),
-          //   ],
-          // ),
           Container(
-            height: 235,
+            height: 245,
             child: ListView.builder(
               itemBuilder: (ctx, index) {
                 return OptionItem(
                   title: answers[index],
                   correctAns: widget.questions[questionIndex]['correctAns'],
+                  isOptionSelected: _isSelected[index],
+                  answerIndex: index,
+                  restOptionsDeselect: resetSelected,
                 );
               },
               itemCount: answers.length,
