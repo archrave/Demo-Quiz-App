@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 import './screens/home_screen.dart';
-import './screens/quiz_screen.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+//import './widgets/get_data.dart';
 
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  //List<Map<String, dynamic>> _questions = [];
   final _questions = const [
     // This is a list of maps, each map contains two keys here
     {
@@ -23,7 +31,6 @@ class MyApp extends StatelessWidget {
     }
   ];
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

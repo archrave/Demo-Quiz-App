@@ -3,6 +3,7 @@ import '../widgets/question.dart';
 import '../widgets/appbar_ui.dart';
 import '../widgets/option_item.dart';
 import '../widgets/next_skip.dart';
+import '../widgets/get_data.dart';
 
 class QuizScreen extends StatefulWidget {
   //Values taken from provided UI sample
@@ -66,6 +67,17 @@ class _QuizScreenState extends State<QuizScreen> {
 
   bool isCorrectAnswerSelected = false;
   List<Container> progressBar;
+  GetData ob;
+  List<Map<String, Object>> updatedQuestions;
+
+  @override
+  // void initState() {
+  //   super.initState();
+  //   ob.fetchQuestions().then((value) {
+  //     updatedQuestions = ob.newQues;
+  //   });
+  // }
+
   @override
   void didChangeDependencies() {
     progressBar = [
