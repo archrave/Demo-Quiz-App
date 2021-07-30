@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../screens/quiz_screen.dart';
 
 class OptionItem extends StatelessWidget {
   final int title;
@@ -61,7 +60,7 @@ class OptionItem extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    width: 25,
+                    width: 22,
                   ),
                   Text('$title'),
                 ],
