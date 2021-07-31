@@ -3,7 +3,6 @@ import '../widgets/question.dart';
 import '../widgets/appbar_ui.dart';
 import '../widgets/option_item.dart';
 import '../widgets/next_skip.dart';
-import '../widgets/get_data.dart';
 
 class QuizScreen extends StatefulWidget {
   //Values taken from provided UI sample
@@ -60,14 +59,13 @@ class _QuizScreenState extends State<QuizScreen> {
       radius: 15,
     ),
   ];
-
-  List<int> get answers {
-    return widget.questions[questionIndex]['answers'] as List<int>;
+  List<int> banswers = [];
+  List<dynamic> get answers {
+    return widget.questions[questionIndex]['answers'] as List<dynamic>;
   }
 
   bool isCorrectAnswerSelected = false;
   List<Container> progressBar;
-  GetData ob;
   List<Map<String, Object>> updatedQuestions;
 
   @override
