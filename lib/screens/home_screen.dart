@@ -19,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen>
     super.initState();
     _controller = AnimationController(
         vsync: this, duration: Duration(milliseconds: 3000));
-    _startAnim = Tween<Size>(begin: Size(390, 200), end: Size(360, 85)).animate(
+    _startAnim = Tween<Size>(begin: Size(390, 150), end: Size(360, 85)).animate(
         CurvedAnimation(parent: _controller, curve: Curves.fastOutSlowIn));
     _startAnim.addListener(() => setState(() {}));
 
@@ -40,6 +40,7 @@ class _HomeScreenState extends State<HomeScreen>
     });
     return Scaffold(
       body: Column(
+        //mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Container(
             padding: EdgeInsets.all(3),
@@ -116,23 +117,28 @@ class _HomeScreenState extends State<HomeScreen>
                 ),
                 onPressed: () => loadQuiz(context)),
           ),
-          SizedBox(height: 50),
-          Container(
-              width: 260,
-              height: 55,
-              child: RaisedButton(
-                onPressed: () => loadQuiz(context),
-                color: Theme.of(context).primaryColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.0),
-                ),
-                child: Text('Instant Quiz',
-                    style: TextStyle(color: Colors.white, fontSize: 16)),
-              )),
-          SizedBox(height: 30),
-          Text(
-            'Candidate ID: Divyansh_divyanshjoshi20@gmail.com',
-            style: TextStyle(fontSize: 10),
+          SizedBox(height: 300),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Container(
+                  width: 260,
+                  height: 55,
+                  child: RaisedButton(
+                    onPressed: () => loadQuiz(context),
+                    color: Theme.of(context).primaryColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
+                    child: Text('Instant Quiz',
+                        style: TextStyle(color: Colors.white, fontSize: 16)),
+                  )),
+              SizedBox(height: 30),
+              Text(
+                'Candidate ID: Divyansh_divyanshjoshi20@gmail.com',
+                style: TextStyle(fontSize: 10),
+              ),
+            ],
           )
         ],
       ),
