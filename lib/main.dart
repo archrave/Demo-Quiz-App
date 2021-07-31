@@ -22,7 +22,7 @@ class _MyAppState extends State<MyApp> {
     try {
       final response = await http.get(url);
       final extractedData = (json.decode(response.body));
-      List<Map<String, dynamic>> newQuestions = [];
+      List<Map<String, Object>> newQuestions = [];
       extractedData.forEach((element) {
         newQuestions.add({
           'questionText1': element['q'].split(new RegExp(r"[:]"))[0],
@@ -45,23 +45,9 @@ class _MyAppState extends State<MyApp> {
   }
 
   //List<Map<String, dynamic>> _questions = [];
-  final _questions = const [
-    // This is a list of maps, each map contains two keys here
-    {
-      'questionText1': 'Find the missing number in series',
-      'questionText2': '8, ?, -4, -10, -16, -22?',
-      'answers': [0, -1, -3, -2],
-      'correctAns': -2,
-    },
-    {
-      'questionText1': 'Find the missing number in series',
-      'questionText2': '75, 143, 279, 551, ?, 2183',
-      'answers': [640, 780, 980, 1095],
-      'correctAns': 1095,
-    }
-  ];
+
   //final _questions = const
-  List<Map<String, Object>> hardCodedQuestions = const [
+  List<Map<String, Object>> _questions = const [
     {
       'questionText1': 'Find the missing number in series',
       'questionText2': '58, 116, ?, 232, 290, 348',
@@ -95,9 +81,9 @@ class _MyAppState extends State<MyApp> {
   ];
 
   @override
-  void initState() {
+  void didChangeDependencies() {
+    super.didChangeDependencies();
     fetchQuestions();
-    super.initState();
   }
 
   @override
@@ -119,8 +105,8 @@ class _MyAppState extends State<MyApp> {
                 body2: TextStyle(fontFamily: 'Roboto', fontSize: 14),
               )),
       home: HomeScreen(
-        // _newQues,
-        hardCodedQuestions,
+        //_newQues,
+        _questions,
       ),
     );
   }

@@ -6,7 +6,7 @@ import '../widgets/next_skip.dart';
 
 class QuizScreen extends StatefulWidget {
   //Values taken from provided UI sample
-  final List<Map<String, Object>> questions;
+  List<Map<String, Object>> questions = [];
 
   QuizScreen(this.questions);
 
@@ -59,7 +59,7 @@ class _QuizScreenState extends State<QuizScreen> {
       radius: 15,
     ),
   ];
-  List<int> banswers = [];
+  // List<dynamic> answers = [12, 34, 54, 67];
   List<dynamic> get answers {
     return widget.questions[questionIndex]['answers'] as List<dynamic>;
   }
@@ -78,13 +78,13 @@ class _QuizScreenState extends State<QuizScreen> {
 
   @override
   void didChangeDependencies() {
+    super.didChangeDependencies();
     progressBar = [
       Container(
         width: 26.16,
         color: Theme.of(context).errorColor,
       ),
     ];
-    super.didChangeDependencies();
   }
 
   void resetSelected(int ansIndex) {
