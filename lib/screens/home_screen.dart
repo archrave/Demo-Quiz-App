@@ -1,18 +1,43 @@
 import 'package:flutter/material.dart';
 import './quiz_screen.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   final List<Map<String, Object>> homeQuestions;
   HomeScreen(this.homeQuestions);
 
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
+  AnimationController _controller;
+  Animation<Size> _startAnim;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+        vsync: this, duration: Duration(milliseconds: 3000));
+    _startAnim = Tween<Size>(begin: Size(390, 200), end: Size(360, 85)).animate(
+        CurvedAnimation(parent: _controller, curve: Curves.fastOutSlowIn));
+    _startAnim.addListener(() => setState(() {}));
+
+    _controller.forward();
+  }
+
   void loadQuiz(BuildContext ctx) {
     Navigator.of(ctx).push(MaterialPageRoute(builder: (_) {
-      return QuizScreen(homeQuestions);
+      return QuizScreen(widget.homeQuestions);
     }));
   }
 
   @override
   Widget build(BuildContext context) {
+    setState(() {
+      _controller.forward();
+      //_controller.reverse();
+    });
     return Scaffold(
       body: Column(
         children: [
@@ -37,7 +62,7 @@ class HomeScreen extends StatelessWidget {
           ),
           Container(
             width: 330,
-            height: 85,
+            height: _startAnim.value.height,
             child: RaisedButton(
                 elevation: 5,
                 color: Color(0xFFF6F5F5),
@@ -91,7 +116,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 onPressed: () => loadQuiz(context)),
           ),
-          SizedBox(height: 350),
+          SizedBox(height: 50),
           Container(
               width: 260,
               height: 55,
