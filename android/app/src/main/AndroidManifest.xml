@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.domo_quiz">
-   <application
-        android:label="domo_quiz"
+    package="com.divyanshjoshidev.domo_quiz">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <application
+        android:label="DOMO Quiz Module"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

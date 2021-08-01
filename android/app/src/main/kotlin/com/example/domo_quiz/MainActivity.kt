@@ -1,4 +1,4 @@
-package com.example.domo_quiz
+package com.divyanshjoshidev.domo_quiz
 
 import io.flutter.embedding.android.FlutterActivity
 

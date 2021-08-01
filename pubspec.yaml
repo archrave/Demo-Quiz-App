@@ -32,6 +32,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.9.1
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -49,7 +51,8 @@ flutter:
     - images/domo_logo.png
     - images/024_logo.png
     - images/024quiz_logo.png
-
+    - icons/icon.png
+    - icons/icon-100.jpg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
@@ -77,3 +80,10 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "icons/icon-100.jpg"
+  adaptive_icon_background: "#191919"
+  adaptice_icon_foreground: "icons/icon.png"

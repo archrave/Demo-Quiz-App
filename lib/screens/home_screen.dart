@@ -117,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen>
                 ),
                 onPressed: () => loadQuiz(context)),
           ),
-          SizedBox(height: 300),
+          SizedBox(height: 290),
           Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
